@@ -1,1 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+
+@import '~@ngx-share/button/themes/default/default-theme';
+/* deeppurple-amber.css
+indigo-pink.css
+pink-bluegrey.css
+purple-green.css */
+@import '~highlight.js/styles/github.css';
+body{
+    margin: 0;
+    height: 100%;
+  }
+  .container{
+      margin: 5px;
+  }
+  html{
+      height: 100%;
+  }
+  .sidenav-container
+  {
+     
+    
+      background-repeat: round    ; 
+      background-attachment: fixed;
+      position: relative;
+      background-size:  cover;
+  
+  
+  }
+.mat-toolbar{
+    background-color: black;
+}
+.footer{
+    background-color:black;
+}
+.mat-raised-button{
+    background-color: #7e7a77;
+    color: white;
+}
+.box{
+    
+    border-radius: 10px;
+    border-top-color: #ff6600;
+    border-top-width: 3px;
+    border: solid 1px black;
+}
+.full {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .full > * {
+    width: 100%;
+  }
+
+  .mat-button{
+      color: white;
+      font-size: 10px;
+      text-align: left !important;
+  }
+
+  html{
+     
+  }
+
+
+  body{
+      margin-bottom: 50px;
+  }

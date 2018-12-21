@@ -1,0 +1,65 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav  #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar  class="notofont" style="color: white;">ເມນູ</mat-toolbar>
+    <mat-nav-list>
+     <!--  <a mat-list-item   (click)="drawer.toggle()" routerLink="/login"><mat-icon matSuffix>lock_open</mat-icon>&nbsp;ເຂົ້າສູ່ລະບົບ</a>
+       <a  routerLink="/home" mat-list-item   (click)="drawer.toggle()" ><mat-icon matSuffix>list</mat-icon>&nbsp; ເບິ່ງ Statement</a>
+      <a  routerLink="/changepassword" mat-list-item   (click)="drawer.toggle()" ><mat-icon matSuffix>vpn_key</mat-icon>&nbsp; ປ່ຽນລະຫັດ</a> -->
+      <hr>
+      <div class="inner-content">
+         <!--  <a mat-list-item *ngIf=" .loggedIn()" routerLink="/manual" (click)="drawer.toggle()" ><mat-icon matSuffix>note</mat-icon>&nbsp;ຄູ່ມື</a> -->
+        <!--   <a mat-list-item   ><mat-icon matSuffix>person_outline</mat-icon>ຜູ້ໃຊ້ລະບົບ: </a>
+          <a mat-list-item routerLink="/how-to" (click)="drawer.toggle()"   ><mat-icon matSuffix>book&nbsp;</mat-icon>ຄູ່ມື</a>
+          <a mat-list-item    ><mat-icon matSuffix>lock</mat-icon>&nbsp;ອອກຈາກລະບົບ</a> -->
+         
+      <!--   <a mat-list-item (click)="drawer.toggle()" routerLink="/">ກ່່ຽວກັບ</a> -->
+      </div> 
+    </mat-nav-list>
+  </mat-sidenav>
+   
+ <!--  <mat-sidenav-content (scroll)="scrollTop()"> -->
+    <mat-sidenav-content  > 
+    <mat-toolbar > 
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon style="color: white;" aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <img [routerLink]="['/home']"   style="border-radius: 5px;color: white;" alt="" width="50px">&nbsp;
+      <div style="color: white;">Code Generator <!-- <div *ngIf=" .loggedIn(); else notlogin"> ຂອງຮ້ານ {{  .getMerchantName()}}</div> --></div>
+      <button mat-button routerLink='config'>Config</button>
+      <button mat-button routerLink='procedure'>Create Procedure</button>
+      <button mat-button routerLink='backend'>Create Back-End Code</button>
+
+      <span class="spacer"></span>
+      
+    </mat-toolbar>
+
+    <div class="inner-content example-container">
+        <app-footer></app-footer>  
+    </div>
+    <ng-content></ng-content>
+   
+
+   <!--  <button  mat-fab   (click)="onGotoTopClick()" color="primary"   style="position: fixed;  bottom: 30px; right: 30px;">
+      <mat-icon>keyboard_arrow_up</mat-icon>
+    </button>  -->
+
+  </mat-sidenav-content>
+
+
+
+ 
+</mat-sidenav-container>
+
+
+
+
+
+
+<ng-template #notlogin> 
+  <label></label>
+</ng-template>
+
+<ng-template #login>
+ <label> </label>
+</ng-template>
