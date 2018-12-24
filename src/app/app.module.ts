@@ -22,6 +22,7 @@ import {ClipboardModule} from 'ngx-clipboard'
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ProcedureCreateComponent } from './modules/procedure-create/procedure-create.component';
 export function hljsLanguages() {
   return [
     {name: 'typescript', func: typescript},
@@ -38,7 +39,8 @@ export function hljsLanguages() {
     MainNavComponent,
     ConfigSystemComponent,
     GenerateProcedureComponent,
-    GenerateBackendComponent
+    GenerateBackendComponent,
+    ProcedureCreateComponent
   ],
   imports: [
     BrowserModule,

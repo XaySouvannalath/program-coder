@@ -3,7 +3,7 @@ const path = require('path')
 const cors = require('cors')
 const app = express()
 
-ß
+
 app.use(cors())
 app.use(express.static('./dist/program-coder'))
 app.get('/', (req,res)=>{

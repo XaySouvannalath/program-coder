@@ -1,6 +1,6 @@
 <div class="left" fxLayout fxLayout.xs="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px"
   fxLayoutGap.xs="0">
-  <div class="item item-1" fxFlex="25%">
+  <div class="item item-1" fxFlex="50%">
     <mat-card class="full box">
       <mat-card-header>
         <mat-card-title>Select Table</mat-card-title>
@@ -16,67 +16,9 @@
       </mat-form-field>
     </mat-card><br>
   </div>
-  <div class="item item-1" fxFlex="25%">
-    
-          <mat-expansion-panel class="full box">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-               Select Column
-              </mat-panel-title>
-              <mat-panel-description>
-                 
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-         
-              <mat-radio-group>
-                <mat-radio-button [checked]="check_all" (change)="_checkAll()" value="checkall">Check All</mat-radio-button>&nbsp;
-                <mat-radio-button [checked]="check_none" (change)="_uncheckAll()" value="unckeckall">Uncheck All</mat-radio-button>&nbsp;
-                <mat-radio-button [checked]="check_manual" value="manual">Manual</mat-radio-button>
-              </mat-radio-group>
-              <br>
-              <br>
-              <mat-divider>
-              </mat-divider><br>
-              <ul *ngFor="let column of new_column_name; let i = index">
-                <div class="" fxLayout fxLayout.xs="column" fxLayoutAlign="left"  fxLayoutGap.xs="0" class="full">
-                  <div class="full" fxFlex="60%">
-                    <mat-checkbox [checked]="column.isChecked" (change)="_checkIndividual(i)">{{column.COLUMN_NAME}}</mat-checkbox>
-                  </div>
-                  <div class="full" fxFlex="30%">
-                    <mat-form-field appearance="outline">
-                      <mat-label>Default Value</mat-label>
-                      <input matInput placeholder="default value" (input)="_onEditDefaultValue(default_value.value, i)" value={{column.defaultValue}}
-                        #default_value>
-                    </mat-form-field>
-        
-        
-                  </div>
-                </div>
-              </ul>
-            
-          </mat-expansion-panel>
-          
-        
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
-  <div fxFlex="25%">
-    <mat-card class="full box">
+  <div fxFlex="50%">
+    <mat-card class="full box" >
       <mat-card-header>
         <mat-card-title>Procedure Type</mat-card-title>
       </mat-card-header>
@@ -91,25 +33,137 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-     
+
     </mat-card>
 
   </div>
-  <div fxFlex="25%">
-    <mat-card class="full box">
-      <button mat-raised-button (click)="_onGenerate()">Generate</button>
-    </mat-card>
-  </div>
-
 </div><br>
+
+
+<div class="left" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="100%" class="full">
+
+
+    <mat-radio-group>
+      <mat-radio-button [checked]="check_all" (change)="_checkAll()" value="checkall">Check All</mat-radio-button>&nbsp;
+      <mat-radio-button [checked]="check_none" (change)="_uncheckAll()" value="unckeckall">Uncheck All</mat-radio-button>&nbsp;
+      <mat-radio-button [checked]="check_manual" value="manual">Manual</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <br>
+    <mat-divider>
+    </mat-divider><br>
+   
+    <mat-card class="full">
+      
+    
+   
+
+    <table id="customers" class="" *ngIf="procedure_type == 'CREATE'; else update">
+        <th>No.</th>
+        <th>Column name</th>
+        <th>procedure parameter | <mat-checkbox>check all</mat-checkbox></th>
+        <th>insert record | <mat-checkbox>check all</mat-checkbox></th>
+        <th>insert value</th>
+        <th>detault value</th>
+        
+        <tr *ngFor="let column of new_column_name; let i = index">
+          <td>
+              {{i + 1}}
+          </td>
+          <td>{{column.COLUMN_NAME}}</td>
+          <td>
+            <mat-checkbox></mat-checkbox>
+          </td>
+          <td>
+            <mat-checkbox></mat-checkbox>
+          </td>
+          <td>
+            <mat-checkbox></mat-checkbox>
+          </td>
+          <td class="full">
+            <input type="text" placeholder="default value">
+            </td>
+        </tr>
+  
+      </table>
+ 
+  </mat-card>
+
+
+    <ul *ngFor="let column of new_column_name; let i = index">
+      <div class="" fxLayout fxLayout.xs="column" fxLayoutAlign="left" fxLayoutGap.xs="0" class="full">
+        <div class="full" fxFlex="60%">
+          <mat-checkbox [checked]="column.isChecked" (change)="_checkIndividual(i)">{{column.COLUMN_NAME}}</mat-checkbox>
+        </div>
+        <div class="full" fxFlex="30%">
+          <mat-form-field appearance="outline">
+            <mat-label>Default Value</mat-label>
+            <input matInput placeholder="default value" (input)="_onEditDefaultValue(default_value.value, i)" value={{column.defaultValue}}
+              #default_value>
+          </mat-form-field>
+
+
+        </div>
+      </div>
+    </ul>
+
+
+  </div>
+</div>
+
+<div class="left" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="100%" class="full">
+    <div fxFlex="25%">
+      <mat-card class="full box">
+        <button mat-raised-button (click)="_onGenerate()">Generate</button>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
 <div class="left" fxLayout fxLayout.xs="column" fxLayoutAlign="left" fxLayoutGap="10px" fxLayoutGap.xs="0">
   <div class="item item-1" fxFlex="100%">
     <mat-card class="full box">
       <h3>Procedure code is here</h3>
       <button mat-raised-button (click)="copy()" style="width: 10%; left: 90%; top: 0%;">Copy</button>
       <pre><code [highlight]="code" (highlighted)="onHighlight($event)"></code></pre>
-      
+
     </mat-card>
   </div>
 </div>
 
+
+
+
+
+
+<ng-template #update>
+    <table id="customers" class="" >
+        <th>No.</th>
+        <th>Column name</th>
+        <th>PC_PARAMS | <mat-checkbox>check all</mat-checkbox></th>
+        <th>assign value | <mat-checkbox>check all</mat-checkbox></th>
+        <th>default value</th>
+        
+        <tr *ngFor="let column of new_column_name; let i = index">
+          <td>
+              {{i + 1}}
+          </td>
+          <td>{{column.COLUMN_NAME}}</td>
+          <td>
+            <mat-checkbox></mat-checkbox>
+          </td>
+          <td>
+            <mat-checkbox></mat-checkbox>
+          </td>
+          <td class="full">
+           
+               
+            <input type="text" placeholder="default value">
+             
+            </td>
+        </tr>
+  
+      </table>
+</ng-template>

@@ -14,7 +14,7 @@
   z-index:4;
   top: 0;
 }
- @media(min-width: 100px){
+ @media(min-width: 4000px){
   .sidenav{
     display: none;
   }

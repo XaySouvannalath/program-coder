@@ -6,6 +6,8 @@
      <!--  <a mat-list-item   (click)="drawer.toggle()" routerLink="/login"><mat-icon matSuffix>lock_open</mat-icon>&nbsp;ເຂົ້າສູ່ລະບົບ</a>
        <a  routerLink="/home" mat-list-item   (click)="drawer.toggle()" ><mat-icon matSuffix>list</mat-icon>&nbsp; ເບິ່ງ Statement</a>
       <a  routerLink="/changepassword" mat-list-item   (click)="drawer.toggle()" ><mat-icon matSuffix>vpn_key</mat-icon>&nbsp; ປ່ຽນລະຫັດ</a> -->
+      <a  routerLink="/procedure" mat-list-item   (click)="drawer.toggle()" ><mat-icon matSuffix>list</mat-icon>&nbsp; Procedure</a>
+      <a  routerLink="/backend" mat-list-item   (click)="drawer.toggle()" ><mat-icon matSuffix>list</mat-icon>&nbsp; Backend</a>
       <hr>
       <div class="inner-content">
          <!--  <a mat-list-item *ngIf=" .loggedIn()" routerLink="/manual" (click)="drawer.toggle()" ><mat-icon matSuffix>note</mat-icon>&nbsp;ຄູ່ມື</a> -->
@@ -26,9 +28,9 @@
       </button>
       <img [routerLink]="['/home']"   style="border-radius: 5px;color: white;" alt="" width="50px">&nbsp;
       <div style="color: white;">Code Generator <!-- <div *ngIf=" .loggedIn(); else notlogin"> ຂອງຮ້ານ {{  .getMerchantName()}}</div> --></div>
-      <button mat-button routerLink='config'>Config</button>
+    <!--   <button mat-button routerLink='config'>Config</button>
       <button mat-button routerLink='procedure'>Create Procedure</button>
-      <button mat-button routerLink='backend'>Create Back-End Code</button>
+      <button mat-button routerLink='backend'>Create Back-End Code</button> -->
 
       <span class="spacer"></span>
       

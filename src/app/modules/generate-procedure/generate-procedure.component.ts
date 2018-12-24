@@ -37,6 +37,19 @@ export class GenerateProcedureComponent implements OnInit {
   procedure_parameter_value = []
   procedure_update_assignment = []
 
+
+
+  // all new variable
+
+  //for create 
+  create_parameter = []
+  create_insert_record = []
+  create_insert_value = []
+
+  //for update
+
+  
+
   ngOnInit() {
     this._getTable()
   }

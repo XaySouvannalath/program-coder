@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
-@import '~@angular/material/prebuilt-themes/purple-green.css';
-
+/* @import '~@angular/material/prebuilt-themes/purple-green.css';
+*/
 @import '~@ngx-share/button/themes/default/default-theme';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 /* deeppurple-amber.css
 indigo-pink.css
 pink-bluegrey.css
@@ -69,4 +69,32 @@ body{
 
   body{
       margin-bottom: 50px;
+  }
+  td, th{
+      text-align: left;
+  }
+
+ 
+ 
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+
+  input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
   }
