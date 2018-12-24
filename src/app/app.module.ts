@@ -20,6 +20,8 @@ import sql from 'highlight.js/lib/languages/sql';
 import javascript from 'highlight.js/lib/languages/javascript';
 import {ClipboardModule} from 'ngx-clipboard'
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 export function hljsLanguages() {
   return [
     {name: 'typescript', func: typescript},
@@ -51,7 +53,7 @@ export function hljsLanguages() {
     }),
     ClipboardModule,
     HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
-    ShareButtonsModule
+    ShareButtonsModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],
   providers: [],

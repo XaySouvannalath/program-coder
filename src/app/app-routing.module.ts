@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:'config', component: ConfigSystemComponent},
   {path:'procedure', component: GenerateProcedureComponent},
   {path:'backend', component: GenerateBackendComponent},
-  { path: '**', redirectTo: 'procedure'},
+  { path: '**', redirectTo: ''},
 ];
 
 @NgModule({

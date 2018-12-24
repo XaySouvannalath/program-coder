@@ -177,43 +177,49 @@ export class GenerateProcedureComponent implements OnInit {
   }
   _generateColumnForProcedure() {
     this.procedure_parameter_column = []
-    for (var i = 0; i < this.checked_column.length; i++) {
+    for (var i = 0; i < this.new_column_name.length; i++) {
       if(i==0){
-        this.procedure_parameter_column.push(this.checked_column[i].COLUMN_NAME)
+        this.procedure_parameter_column.push(this.new_column_name[i].COLUMN_NAME)
       }else{
-        this.procedure_parameter_column.push('\n         ' + this.checked_column[i].COLUMN_NAME)
+        this.procedure_parameter_column.push('\n         ' + this.new_column_name[i].COLUMN_NAME)
       }
     }
   }
   _generateProcedureValue(){
     this.procedure_parameter_value = []
-    for (var i = 0; i < this.checked_column.length; i++) {
+    for (var i = 0; i < this.new_column_name.length; i++) {
       if(i == 0){
         this.procedure_parameter_value.push('V_ID')
       }else{
-        if(this.checked_column[i].defaultValue != ''){
+        if(this.new_column_name[i].defaultValue != ''){
           if(i==1){
-            this.procedure_parameter_value.push(this.checked_column[i].defaultValue)
+            this.procedure_parameter_value.push(this.new_column_name[i].defaultValue)
           }else{
-            this.procedure_parameter_value.push('\n          ' +this.checked_column[i].defaultValue)
+            this.procedure_parameter_value.push('\n          ' +this.new_column_name[i].defaultValue)
           }
         }else{
-          this.procedure_parameter_value.push('\n          P_' +this.checked_column[i].COLUMN_NAME)
+          this.procedure_parameter_value.push('\n          P_' +this.new_column_name[i].COLUMN_NAME)
         }
       }
     }
   }
   _generateProcedureUpdateAssigment(){
     this.procedure_update_assignment = []
-    for (var i = 0; i < this.checked_column.length; i++) {
-      if(this.checked_column[i].COLUMN_NAME != 'ID'){
+    for (var i = 0; i < this.new_column_name.length; i++) {
+      if(this.new_column_name[i].COLUMN_NAME != 'ID'){
         if(i==0){
-          this.procedure_update_assignment.push(this.checked_column[i].COLUMN_NAME + '=P_' + this.checked_column[i].COLUMN_NAME)
+          this.procedure_update_assignment.push(this.new_column_name[i].COLUMN_NAME + '=P_' + this.new_column_name[i].COLUMN_NAME)
         }else{
-          this.procedure_update_assignment.push('\n          ' + this.checked_column[i].COLUMN_NAME + '=P_' + this.checked_column[i].COLUMN_NAME)
+          if(this.new_column_name[i].COLUMN_NAME == 'CLOSE_DATE'){
+            this.procedure_update_assignment.push('\n          ' +'CLOSE_DATE'+ '=V_CLOSE_DATE')
+          }else if(this.new_column_name[i].COLUMN_NAME == 'CLOSE_USER_ID'){
+            this.procedure_update_assignment.push('\n          ' + 'CLOSE_USER_ID' + '=V_CLOSE_USER_ID')
+          }else{
+            this.procedure_update_assignment.push('\n          ' + this.new_column_name[i].COLUMN_NAME + '=P_' + this.new_column_name[i].COLUMN_NAME)
+          }
         }
       }
-      if(i== this.checked_column.length - 1){
+      if(i== this.new_column_name.length - 1){
         this.procedure_update_assignment.push('\n          WHERE ID = P_ID')
       }
     }
@@ -235,19 +241,17 @@ PROCEDURE \"${this._generateProcedureName()}\"
 (
           ${this.procedure_parameter_for_create}
 ) AS
-V_ID NUMBER(10);
+    V_ID NUMBER(10);
 BEGIN
-V_ID := FN_GET_MAX_ID(\'${this.table_name}\'); 
+    V_ID := FN_GET_MAX_ID(\'${this.table_name}\'); 
 INSERT INTO ${this.table_name}(
           ${this.procedure_parameter_column}
 )
 VALUES(
           ${this.procedure_parameter_value}
 )
-P_ROW := SQL%ROWCOUNT;
 END;
 
- 
     ` :
 
 this.code = 
@@ -255,6 +259,7 @@ this.code =
 CREATE OR REPLACE 
 PROCEDURE \"${this._generateProcedureName()}\"(
           ${this.procedure_parameter_for_update}
+          P_ROW OUT NUMBER
 ) AS
     V_CLOSE_DATE DATE := NULL;
     V_CLOSE_USER_ID VARCHAR2(50) := NULL;
