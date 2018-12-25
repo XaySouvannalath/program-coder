@@ -62,28 +62,25 @@
     <table id="customers" class="" *ngIf="procedure_type == 'CREATE'; else update">
         <th>No.</th>
         <th>Column name</th>
-        <th>procedure parameter | <mat-checkbox>check all</mat-checkbox></th>
+        <th>procedure parameter | <mat-checkbox (change)="_create_params_check_all()">check all</mat-checkbox></th>
         <th>insert record | <mat-checkbox>check all</mat-checkbox></th>
-        <th>insert value</th>
+       
         <th>detault value</th>
         
-        <tr *ngFor="let column of new_column_name; let i = index">
+        <tr *ngFor="let column of create_parameter; let i = index">
           <td>
               {{i + 1}}
           </td>
           <td>{{column.COLUMN_NAME}}</td>
           <td>
-            <mat-checkbox></mat-checkbox>
-          </td>
-          <td>
-            <mat-checkbox></mat-checkbox>
+            <mat-checkbox [checked]="column.isCheck"></mat-checkbox>
           </td>
           <td>
             <mat-checkbox></mat-checkbox>
           </td>
           <td class="full">
             <input type="text" placeholder="default value">
-            </td>
+          </td> 
         </tr>
   
       </table>
@@ -91,7 +88,7 @@
   </mat-card>
 
 
-    <ul *ngFor="let column of new_column_name; let i = index">
+<!--     <ul *ngFor="let column of new_column_name; let i = index">
       <div class="" fxLayout fxLayout.xs="column" fxLayoutAlign="left" fxLayoutGap.xs="0" class="full">
         <div class="full" fxFlex="60%">
           <mat-checkbox [checked]="column.isChecked" (change)="_checkIndividual(i)">{{column.COLUMN_NAME}}</mat-checkbox>
@@ -107,7 +104,7 @@
         </div>
       </div>
     </ul>
-
+ -->
 
   </div>
 </div>

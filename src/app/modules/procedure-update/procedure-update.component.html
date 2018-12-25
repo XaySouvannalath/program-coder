@@ -23,32 +23,26 @@
       <mat-form-field appearance="outline">
         <mat-label>Select Create or Update</mat-label>
         <mat-select placeholder="Select Procedure Type" [(ngModel)]="procedure_type" name="item">
-          <mat-option value="CREATE">
-            CREATE
+          <mat-option value="UPDATE">
+            UPDATE
           </mat-option>
         </mat-select>
       </mat-form-field>
     </mat-card>
   </div>
 </div>
-
-
-
-<div class="left" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0" *ngIf="isSelectTable">
+<div class="left" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0" *ngIf="isSelectTable"> 
   <div fxFlex="100%" class="full">
-    <table id="customers" class="" *ngIf="procedure_type == 'CREATE'">
+    <table id="customers" class="">
       <th>No.</th>
       <th>Column name</th>
-      <th>procedure parameter | <mat-checkbox [(indeterminate)]="indeterminate" [checked]="paramsChecked" (change)="_parameter_check_all()">check
-          all</mat-checkbox>
+      <th>PC_PARAMS | <mat-checkbox [(indeterminate)]="indeterminate" [checked]="paramsChecked" (change)="_parameter_check_all()" >check all</mat-checkbox>
       </th>
-      <th>insert record | <mat-checkbox [(indeterminate)]="indeterminate_value" [checked]="valueChecked" (change)="_insert_record_check_all()">check
-          all</mat-checkbox>
+      <th>assign value | <mat-checkbox [(indeterminate)]="indeterminate_value" [checked]="valueChecked" (change)="_insert_record_check_all()">check all</mat-checkbox>
       </th>
+      <th>default value</th>
 
-      <th>detault value</th>
-
-      <tr *ngFor="let column of create_array; let i = index">
+      <tr *ngFor="let column of update_array; let i = index">
         <td>
           {{i + 1}}
         </td>
@@ -60,16 +54,20 @@
           <mat-checkbox [checked]="column.isValueChecked" (change)="_value_check_single(i)"></mat-checkbox>
         </td>
         <td class="full">
-          <mat-form-field appearance="outline">
-            <mat-label>default</mat-label>
-            <input matInput (input)="_add_default_value(i,default.value)" #default>
-          </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>default</mat-label>
+                <input matInput (input)="_add_default_value(i,default.value)" #default>
+              </mat-form-field>
+          
 
         </td>
       </tr>
+
     </table>
   </div>
 </div>
+
 <br>
 <div class="left" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
   <div fxFlex="100%" class="full">
@@ -77,14 +75,13 @@
   </div>
 </div>
 <br>
-
 <div class="left" fxLayout fxLayout.xs="column" fxLayoutAlign="left" fxLayoutGap="10px" fxLayoutGap.xs="0" *ngIf="isGenerateCode">
-  <div class="item item-1" fxFlex="100%">
-    <mat-card class="full box">
-      <h3>Procedure code is here</h3>
-      <button mat-raised-button (click)="copy()" style="width: 10%; left: 90%; top: 0%;">Copy</button>
-      <pre (click)="copy()"><code [highlight]="code" (highlighted)="onHighlight($event)"></code></pre>
-
-    </mat-card>
+    <div class="item item-1" fxFlex="100%">
+      <mat-card class="full box">
+        <h3>Procedure code is here</h3>
+        <button mat-raised-button (click)="copy()" style="width: 10%; left: 90%; top: 0%;">Copy</button>
+        <pre (click)="copy()"><code [highlight]="code" (highlighted)="onHighlight($event)"></code></pre>
+  
+      </mat-card>
+    </div>
   </div>
-</div>

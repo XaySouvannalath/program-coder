@@ -26,7 +26,7 @@ export class GenerateProcedureComponent implements OnInit {
   column_name
   new_column_name = []
   new_column_for_create = []
-   check_all
+  check_all
   check_none
   check_manual
 
@@ -48,7 +48,7 @@ export class GenerateProcedureComponent implements OnInit {
 
   //for update
 
-  
+
 
   ngOnInit() {
     this._getTable()
@@ -61,14 +61,15 @@ export class GenerateProcedureComponent implements OnInit {
   }
 
   _onSelectTable(table) {
-    console.log('heelo world')
-    this.column_name = null
+    this.column_name = []
     this.new_column_name = []
     this.table_name = table
     this._api.getCulumns(this.table_name).subscribe(res => {
       this.column_name = []
       this.column_name = res.data
-      console.log(this.column_name)
+
+
+
       for (var i = 0; i < this.column_name.length; i++) {
         this.new_column_name.push({
           COLUMN_NAME: this.column_name[i].COLUMN_NAME,
@@ -78,6 +79,13 @@ export class GenerateProcedureComponent implements OnInit {
       }
     })
   }
+
+
+
+
+
+
+
   _onClickTable(tableName) {
     this.column_name = null
     this.new_column_name = []
@@ -166,14 +174,13 @@ export class GenerateProcedureComponent implements OnInit {
   _generateProcedureParameterForCreate() {
     this.procedure_parameter_for_create = []
     for (var i = 0; i < this.checked_column.length; i++) {
-      if(this.checked_column[i].COLUMN_NAME != "ID")
-      {
-        if(i==0){
+      if (this.checked_column[i].COLUMN_NAME != "ID") {
+        if (i == 0) {
           this.procedure_parameter_for_create.push('P_' + this.checked_column[i].COLUMN_NAME + ' ' + this.table_name + '.' + this.checked_column[i].COLUMN_NAME + '%TYPE')
         }
-        else{
+        else {
           this.procedure_parameter_for_create.push('\n          P_' + this.checked_column[i].COLUMN_NAME + ' ' + this.table_name + '.' + this.checked_column[i].COLUMN_NAME + '%TYPE')
-   
+
         }
       }
     }
@@ -181,9 +188,9 @@ export class GenerateProcedureComponent implements OnInit {
   _generateProcedureParameterForUpdate() {
     this.procedure_parameter_for_update = []
     for (var i = 0; i < this.checked_column.length; i++) {
-      if(i==0){
+      if (i == 0) {
         this.procedure_parameter_for_update.push('P_' + this.checked_column[i].COLUMN_NAME + ' ' + this.table_name + '.' + this.checked_column[i].COLUMN_NAME + '%TYPE')
-      }else{
+      } else {
         this.procedure_parameter_for_update.push('\n          P_' + this.checked_column[i].COLUMN_NAME + ' ' + this.table_name + '.' + this.checked_column[i].COLUMN_NAME + '%TYPE')
       }
     }
@@ -191,48 +198,60 @@ export class GenerateProcedureComponent implements OnInit {
   _generateColumnForProcedure() {
     this.procedure_parameter_column = []
     for (var i = 0; i < this.new_column_name.length; i++) {
-      if(i==0){
+      if (i == 0) {
         this.procedure_parameter_column.push(this.new_column_name[i].COLUMN_NAME)
-      }else{
+      } else {
         this.procedure_parameter_column.push('\n         ' + this.new_column_name[i].COLUMN_NAME)
       }
     }
   }
-  _generateProcedureValue(){
+  _generateProcedureValue() {
     this.procedure_parameter_value = []
     for (var i = 0; i < this.new_column_name.length; i++) {
-      if(i == 0){
+      if (i == 0) {
         this.procedure_parameter_value.push('V_ID')
-      }else{
-        if(this.new_column_name[i].defaultValue != ''){
-          if(i==1){
+      } else {
+        if (this.new_column_name[i].defaultValue != '') {
+          if (i == 1) {
             this.procedure_parameter_value.push(this.new_column_name[i].defaultValue)
-          }else{
-            this.procedure_parameter_value.push('\n          ' +this.new_column_name[i].defaultValue)
+          } else {
+            this.procedure_parameter_value.push('\n          ' + this.new_column_name[i].defaultValue)
           }
-        }else{
-          this.procedure_parameter_value.push('\n          P_' +this.new_column_name[i].COLUMN_NAME)
+        } else {
+          this.procedure_parameter_value.push('\n          P_' + this.new_column_name[i].COLUMN_NAME)
         }
       }
     }
   }
-  _generateProcedureUpdateAssigment(){
+
+
+  _create_params_check_all() {
+    this.create_parameter = this.new_column_name.map(column => {
+      return column.isChecked = true
+    })
+
+  }
+  _create_insert_record_check_all() {
+
+  }
+
+  _generateProcedureUpdateAssigment() {
     this.procedure_update_assignment = []
     for (var i = 0; i < this.new_column_name.length; i++) {
-      if(this.new_column_name[i].COLUMN_NAME != 'ID'){
-        if(i==0){
+      if (this.new_column_name[i].COLUMN_NAME != 'ID') {
+        if (i == 0) {
           this.procedure_update_assignment.push(this.new_column_name[i].COLUMN_NAME + '=P_' + this.new_column_name[i].COLUMN_NAME)
-        }else{
-          if(this.new_column_name[i].COLUMN_NAME == 'CLOSE_DATE'){
-            this.procedure_update_assignment.push('\n          ' +'CLOSE_DATE'+ '=V_CLOSE_DATE')
-          }else if(this.new_column_name[i].COLUMN_NAME == 'CLOSE_USER_ID'){
+        } else {
+          if (this.new_column_name[i].COLUMN_NAME == 'CLOSE_DATE') {
+            this.procedure_update_assignment.push('\n          ' + 'CLOSE_DATE' + '=V_CLOSE_DATE')
+          } else if (this.new_column_name[i].COLUMN_NAME == 'CLOSE_USER_ID') {
             this.procedure_update_assignment.push('\n          ' + 'CLOSE_USER_ID' + '=V_CLOSE_USER_ID')
-          }else{
+          } else {
             this.procedure_update_assignment.push('\n          ' + this.new_column_name[i].COLUMN_NAME + '=P_' + this.new_column_name[i].COLUMN_NAME)
           }
         }
       }
-      if(i== this.new_column_name.length - 1){
+      if (i == this.new_column_name.length - 1) {
         this.procedure_update_assignment.push('\n          WHERE ID = P_ID')
       }
     }
@@ -248,7 +267,7 @@ export class GenerateProcedureComponent implements OnInit {
     this._generateProcedureUpdateAssigment()
     console.log(this.procedure_parameter_value)
     this.procedure_type == 'CREATE' ?
-    this.code = `
+      this.code = `
 CREATE OR REPLACE 
 PROCEDURE \"${this._generateProcedureName()}\"
 (
@@ -267,8 +286,8 @@ END;
 
     ` :
 
-this.code = 
-`
+      this.code =
+      `
 CREATE OR REPLACE 
 PROCEDURE \"${this._generateProcedureName()}\"(
           ${this.procedure_parameter_for_update}
@@ -286,8 +305,8 @@ BEGIN
   P_ROW := SQL%ROWCOUNT;
 END;
 `
-  } 
-  
+  }
+
 
 }
 

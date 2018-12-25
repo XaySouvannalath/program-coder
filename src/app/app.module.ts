@@ -23,6 +23,7 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ProcedureCreateComponent } from './modules/procedure-create/procedure-create.component';
+import { ProcedureUpdateComponent } from './modules/procedure-update/procedure-update.component';
 export function hljsLanguages() {
   return [
     {name: 'typescript', func: typescript},
@@ -40,7 +41,8 @@ export function hljsLanguages() {
     ConfigSystemComponent,
     GenerateProcedureComponent,
     GenerateBackendComponent,
-    ProcedureCreateComponent
+    ProcedureCreateComponent,
+    ProcedureUpdateComponent
   ],
   imports: [
     BrowserModule,
