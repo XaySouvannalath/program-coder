@@ -188,7 +188,7 @@ INSERT INTO ${this.table_name}
 VALUES
 (
           ${this.default_value}
-)
+);
   P_ROW := SQL%ROWCOUNT;
 END;
 `

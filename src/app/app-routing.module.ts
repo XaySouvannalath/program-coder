@@ -7,7 +7,7 @@ import { ProcedureCreateComponent } from './modules/procedure-create/procedure-c
 import { ProcedureUpdateComponent } from './modules/procedure-update/procedure-update.component';
 
 const routes: Routes = [
-  {path:'', component: GenerateProcedureComponent},
+  {path:'', component:ProcedureCreateComponent},
   {path:'config', component: ConfigSystemComponent},
   {path:'procedure', component: GenerateProcedureComponent},
   {path:'procedure-create', component: ProcedureCreateComponent},

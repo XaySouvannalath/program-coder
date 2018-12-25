@@ -57,7 +57,8 @@ export function hljsLanguages() {
     }),
     ClipboardModule,
     HttpClientJsonpModule,  // (Optional) Add if you want tumblr share counts
-    ShareButtonsModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ShareButtonsModule, 
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 
   ],
   providers: [],

@@ -134,9 +134,9 @@ export class ProcedureUpdateComponent implements OnInit {
         }
        
       }
-      if (i == this.update_array.length - 1) {
-        this.value_update.push('\n          WHERE ID = P_ID')
-      }
+/*       if (i == this.update_array.length - 1) {
+        this.value_update.push('\n         ')
+      } */
     }
   }
 
@@ -179,6 +179,7 @@ BEGIN
   END IF;
   UPDATE ${this.table_name} SET
         ${this.value_update}
+        WHERE ID = P_ID
 P_ROW := SQL%ROWCOUNT;
 END;
 `
