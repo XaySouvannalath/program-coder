@@ -5,6 +5,7 @@ import { HighlightResult } from 'ngx-highlightjs';
 import { pipe } from 'rxjs';
 import { log } from 'util';
 import * as _ from 'lodash'
+import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-generate-backend',
   templateUrl: './generate-backend.component.html',
@@ -14,7 +15,8 @@ export class GenerateBackendComponent implements OnInit {
 
   constructor(
     private _api: CallApiService,
-    private _clipBoardService: ClipboardService
+    private _clipBoardService: ClipboardService,
+    private _snackBar: MatSnackBar
   ) { }
 
   tables
@@ -77,6 +79,8 @@ export class GenerateBackendComponent implements OnInit {
     this.column_name = null
     this.new_column_name = []
     this.table_name = table
+
+    this.column_name_for_select_get_parameter = []
     this._api.getCulumns(this.table_name).subscribe(res => {
       this.column_name = []
       this.column_name = res.data
@@ -205,9 +209,9 @@ export class GenerateBackendComponent implements OnInit {
     this.get_controller = []
     for (var i = 0; i < this.column_name_for_get_parameter.length; i++) {
       if (i == 0) {
-        this.get_controller.push(`context[\'${this.column_name_for_get_parameter[i]}\'] = req.body[\'${this.column_name_for_get_parameter[i]}\'].toUpperCase()`)
+        this.get_controller.push(`context[\'${this.column_name_for_get_parameter[i]}\'] = _.upperCase(req.query[\'${this.column_name_for_get_parameter[i]}\'])`)
       } else {
-        this.get_controller.push(`\n          context[\'${this.column_name_for_get_parameter[i]}\'] = req.body[\'${this.column_name_for_get_parameter[i]}\'].toUpperCase()`)
+        this.get_controller.push(`\n          context[\'${this.column_name_for_get_parameter[i]}\'] = _.upperCase(req.query[\'${this.column_name_for_get_parameter[i]}\'])`)
       }
     }
   }
@@ -326,8 +330,9 @@ this.code_db_api =
 `
 //---------------------create--------------------//
 const createSql =
-\`CALL PC_${this.table_name}_CREATE(
-            ${this.procedure_column_for_post}
+\`CALL PC_${this.table_name.substr(4, this.table_name.length - 4)}_CREATE(
+                  ${this.procedure_column_for_post},
+            :ROW_COUNT
 )\`;
 async function create(reg) {
   const postData = Object.assign({}, reg);
@@ -370,7 +375,7 @@ function putRec(req) {
       next(err);
     }
 }
-module.export.put = put
+module.exports.put = put
 `
 
 
@@ -378,8 +383,9 @@ module.export.put = put
 `
 const updateSql =
 \`BEGIN
-PC_PRODUCTS_UPDATE(
-          ${this.procedure_column_for_put}
+PC_${this.table_name.substr(4, this.table_name.length - 4)}_UPDATE(
+          ${this.procedure_column_for_put},
+          :ROW_COUNT
 );
 END;\`;
 async function update(reg) {
@@ -407,9 +413,15 @@ module.exports.update = update;
   }
 
   copy_db(){
+    this._snackBar.open("Copied!", "", {
+      duration: 2000,
+    });
     this._clipBoardService.copyFromContent(this.code_db_api)
   }
   copy_controller(){
+    this._snackBar.open("Copied!", "", {
+      duration: 2000,
+    });
     this._clipBoardService.copyFromContent(this.code_controller)
   }
 

@@ -64,6 +64,7 @@ export class ProcedureCreateComponent implements OnInit {
           defaultValue: ''
         })
       }
+      console.log(this.create_array)
     })
   }
   _generateProcedureName() {

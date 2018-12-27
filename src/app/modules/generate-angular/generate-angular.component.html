@@ -1,0 +1,184 @@
+<div class="left" fxLayout fxLayoutAlign="left" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="100%">
+    <mat-card class="full box">
+      <mat-card-header>
+        <mat-card-title>Select Table</mat-card-title>
+      </mat-card-header>
+      <!-- <button mat-button *ngFor="let table of tables" (click)="_onClickTable(table.TABLE_NAME)">{{table.TABLE_NAME}}</button> -->
+      <mat-form-field appearance="outline">
+        <mat-label>Select Table</mat-label>
+        <mat-select placeholder="Select Table" [(ngModel)]="table_name" name="item" #select (selectionChange)="_onSelectTable(table_name)">
+          <mat-option *ngFor="let table of tables" [value]="table.TABLE_NAME">
+            {{table.TABLE_NAME}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card><br>
+  </div>
+</div>
+<div class="left" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+<div fxFlex="100%" class="full">
+  <mat-card class="full box">
+      <table id="customers" class="" >
+          <th>No.</th>
+
+          <th>Column name</th>
+
+          <th>Model Post | 
+            <mat-checkbox 
+            [(indeterminate)]="manualPost" 
+            [checked]="checkPost" 
+            (change)="checkAllPost()">
+            check all
+          </mat-checkbox>
+          </th>
+
+          <th>Model Put | 
+            <mat-checkbox 
+            [(indeterminate)]="manualPut" 
+            [checked]="checkPut" 
+            (change)="checkAllPut()">
+            check all
+          </mat-checkbox>
+          </th>
+
+          <th>Interface Body |
+              <mat-checkbox 
+              [(indeterminate)]="manualBody" 
+              [checked]="checkBody" 
+              (change)="checkAllBody()">
+              check all
+            </mat-checkbox>
+          </th>
+
+          <th>Table Head |
+              <mat-checkbox 
+              [(indeterminate)]="manualHead" 
+              [checked]="checkHead" 
+              (change)="checkAllHead()">
+              check all
+            </mat-checkbox>
+          </th>
+
+          <tr *ngFor="let column of obj; let i = index">
+            <td>
+              {{i + 1}}
+            </td>
+            <td>{{column.name}}</td>
+            <td>
+              <mat-checkbox [checked]="column.post" (change)="checkOnePost(i)"></mat-checkbox>
+            </td>
+            <td>
+              <mat-checkbox [checked]="column.put" (change)="checkOnePut(i)"></mat-checkbox>
+            </td>
+            <td>
+              <mat-checkbox [checked]="column.bd" (change)="checkOneBody(i)"></mat-checkbox>
+            </td>
+            <td>
+              <mat-checkbox [checked]="column.th" (change)="checkOneHead(i)"></mat-checkbox>
+            </td>
+ 
+          </tr>
+        </table>
+  </mat-card>
+  
+</div>
+</div>
+<div class="left" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="33%" class="full">
+    <button mat-raised-button (click)="generate()">Go</button>
+  </div>
+</div>
+<div class="left" fxLayout fxLayoutAlign="left" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="50%" class="">
+    <mat-card class="full box">
+      <mat-card-header>
+        <mat-card-title>Service</mat-card-title>
+        <mat-card-subtitle>copy and paste!</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        
+        <pre (click)="copy(code_service)"><code [highlight]="code_service" (highlighted)="onHighlight($event)"></code></pre>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button>Copy</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div fxFlex="50%" class="">
+    <mat-card class="full box">
+      <mat-card-header>
+        <mat-card-title>Component</mat-card-title>
+        <mat-card-subtitle>copy and paste!</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+          <pre (click)="copy(code_ts)"><code [highlight]="code_ts" (highlighted)="onHighlight($event)"></code></pre>
+          
+          </mat-card-content>
+          <mat-card-actions>
+              <button mat-raised-button>Copy</button>
+          </mat-card-actions>
+        </mat-card>
+  </div>
+</div>
+<div class="left" fxLayout fxLayoutAlign="center" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="100%" class="">
+      <mat-card class="full box">
+          <mat-card-header>
+            <mat-card-title>HTML</mat-card-title>
+            <mat-card-subtitle>copy and paste!</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+          
+          </mat-card-content>
+          <mat-card-actions>
+              <button mat-raised-button>Copy</button>
+          </mat-card-actions>
+        </mat-card>
+  </div>
+</div>
+<div class="left" fxLayout fxLayoutAlign="left" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div fxFlex="33%" class="">
+    <mat-card class="full box">
+      <mat-card-header>
+        <mat-card-title>Interface Model</mat-card-title>
+        <mat-card-subtitle>copy and paste!</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+          <pre (click)="copy(code_model_interface)"><code [highlight]="code_model_interface" (highlighted)="onHighlight($event)"></code></pre>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button>Copy</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div fxFlex="33%" class="">
+      <mat-card class="full box">
+        <mat-card-header>
+          <mat-card-title>Class Model</mat-card-title>
+          <mat-card-subtitle>copy and paste!</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <pre (click)="copy(code_model_class)"><code [highlight]="code_model_class" (highlighted)="onHighlight($event)"></code></pre>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button>Copy</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div fxFlex="33%" class="">
+      <mat-card class="full box">
+        <mat-card-header>
+          <mat-card-title>Table Head</mat-card-title>
+          <mat-card-subtitle>copy and paste!</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <pre (click)="copy(code_table_head)"><code [highlight]="code_table_head" (highlighted)="onHighlight($event)"></code></pre>
+              
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button>Copy</button>
+          </mat-card-actions>
+        </mat-card>
+  </div>
+</div>

@@ -128,7 +128,7 @@
     <mat-card class="full box">
       <h3>Database api code is here</h3>
       <button mat-stroked-button (click)="copy_db()" style="width: 10%; left: 90%; top: 0%;">Copy</button>
-      <pre><code [highlight]="code_db_api"  (highlighted)="onHighlight($event)"></code></pre>
+      <pre (click)="copy_db()"><code [highlight]="code_db_api"  (highlighted)="onHighlight($event)"></code></pre>
       
     </mat-card>
   </div>
@@ -136,7 +136,7 @@
       <mat-card class="full box"> 
         <h3>Controller code is here</h3>
         <button mat-stroked-button style="width: 10%; left: 90%; top: 0%;" (click)="copy_controller()">Copy</button>
-        <pre><code [highlight]="code_controller" (highlighted)="onHighlight($event)"></code></pre>
+        <pre (click)="copy_controller()"><code [highlight]="code_controller" (highlighted)="onHighlight($event)"></code></pre>
         
       </mat-card>
     </div>

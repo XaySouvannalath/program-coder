@@ -1,11 +1,21 @@
-<div class="left" fxLayout fxLayout.xs="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px"
+<mat-tab-group>
+  <mat-tab label="Create">
+    <app-procedure-create></app-procedure-create>
+  </mat-tab>
+  <mat-tab label="Update">
+    <app-procedure-update></app-procedure-update>
+  </mat-tab>
+</mat-tab-group>
+
+
+<!-- <div class="left" fxLayout fxLayout.xs="row" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="10px"
   fxLayoutGap.xs="0">
   <div class="item item-1" fxFlex="50%">
     <mat-card class="full box">
       <mat-card-header>
         <mat-card-title>Select Table</mat-card-title>
       </mat-card-header>
-      <!-- <button mat-button *ngFor="let table of tables" (click)="_onClickTable(table.TABLE_NAME)">{{table.TABLE_NAME}}</button> -->
+     <button mat-button *ngFor="let table of tables" (click)="_onClickTable(table.TABLE_NAME)">{{table.TABLE_NAME}}</button> 
       <mat-form-field appearance="outline">
         <mat-label>Select Table</mat-label>
         <mat-select placeholder="Select Table" [(ngModel)]="table_name" name="item" #select (selectionChange)="_onSelectTable(table_name)">
@@ -88,7 +98,7 @@
   </mat-card>
 
 
-<!--     <ul *ngFor="let column of new_column_name; let i = index">
+    <ul *ngFor="let column of new_column_name; let i = index">
       <div class="" fxLayout fxLayout.xs="column" fxLayoutAlign="left" fxLayoutGap.xs="0" class="full">
         <div class="full" fxFlex="60%">
           <mat-checkbox [checked]="column.isChecked" (change)="_checkIndividual(i)">{{column.COLUMN_NAME}}</mat-checkbox>
@@ -104,7 +114,7 @@
         </div>
       </div>
     </ul>
- -->
+ 
 
   </div>
 </div>
@@ -163,4 +173,4 @@
         </tr>
   
       </table>
-</ng-template>
+</ng-template> -->

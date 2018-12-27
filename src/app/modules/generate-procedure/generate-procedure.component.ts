@@ -51,10 +51,10 @@ export class GenerateProcedureComponent implements OnInit {
 
 
   ngOnInit() {
-    this._getTable()
+   /*  this._getTable() */
   }
 
-  _getTable() {
+ /*  _getTable() {
     this._api.getTableName().subscribe(res => {
       this.tables = res.data
     })
@@ -307,6 +307,6 @@ END;
 `
   }
 
-
+ */
 }
 

@@ -47,6 +47,7 @@ body{
     border-top-color: #ff6600;
     border-top-width: 3px;
     border: solid 1px black;
+    margin: 10px;
 }
 .full {
     display: flex;
@@ -99,3 +100,5 @@ body{
     transition: 0.5s;
     outline: none;
   }
+
+ 

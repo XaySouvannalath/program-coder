@@ -179,7 +179,7 @@ BEGIN
   END IF;
   UPDATE ${this.table_name} SET
         ${this.value_update}
-        WHERE ID = P_ID
+        WHERE ID = P_ID;
 P_ROW := SQL%ROWCOUNT;
 END;
 `

@@ -24,6 +24,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ProcedureCreateComponent } from './modules/procedure-create/procedure-create.component';
 import { ProcedureUpdateComponent } from './modules/procedure-update/procedure-update.component';
+import { GenerateAngularComponent } from './modules/generate-angular/generate-angular.component';
 export function hljsLanguages() {
   return [
     {name: 'typescript', func: typescript},
@@ -42,7 +43,8 @@ export function hljsLanguages() {
     GenerateProcedureComponent,
     GenerateBackendComponent,
     ProcedureCreateComponent,
-    ProcedureUpdateComponent
+    ProcedureUpdateComponent,
+    GenerateAngularComponent
   ],
   imports: [
     BrowserModule,
