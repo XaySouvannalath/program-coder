@@ -63,6 +63,9 @@ export class GenerateBackendComponent implements OnInit {
 
   code_controller
   code_db_api
+  code_body
+  code_body_array
+
 
   ngOnInit() {
 
@@ -209,9 +212,9 @@ export class GenerateBackendComponent implements OnInit {
     this.get_controller = []
     for (var i = 0; i < this.column_name_for_get_parameter.length; i++) {
       if (i == 0) {
-        this.get_controller.push(`context[\'${this.column_name_for_get_parameter[i]}\'] = _.upperCase(req.query[\'${this.column_name_for_get_parameter[i]}\'])`)
+        this.get_controller.push(`context[\'${this.column_name_for_get_parameter[i]}\'] = (req.query[\'${this.column_name_for_get_parameter[i]}\']).toUpperCase()`)
       } else {
-        this.get_controller.push(`\n          context[\'${this.column_name_for_get_parameter[i]}\'] = _.upperCase(req.query[\'${this.column_name_for_get_parameter[i]}\'])`)
+        this.get_controller.push(`\n          context[\'${this.column_name_for_get_parameter[i]}\'] = (req.query[\'${this.column_name_for_get_parameter[i]}\']).toUpperCase()`)
       }
     }
   }
@@ -228,6 +231,19 @@ export class GenerateBackendComponent implements OnInit {
     }
 
     console.log(this.get_db_api)
+  }
+
+  _generateCodeBody(){
+    this.code_body_array = []
+    for (var i = 0; i < this.checked_column.length; i++) {
+      
+        if (i == 0) {
+          this.code_body_array.push('\"' + this.checked_column[i].COLUMN_NAME + '\": \"TEST\"')
+        } else {
+          this.code_body_array.push('\n  \"' +this.checked_column[i].COLUMN_NAME + '\": \"TEST\"')
+        }
+     
+    }
   }
   _selectHttpType() {
     if (this.http_type == 'get') {
@@ -298,6 +314,7 @@ module.exports.find = find;
     this._generateReqBodyForPut()
     this._generateColumnForProcedureForPost()
     this._generateColumnForProcedureForPut()
+    this._generateCodeBody()
     if (this.http_type == 'get') {
      this._get()
     } else if (this.http_type == 'post') {
@@ -328,6 +345,7 @@ module.exports.post = post
 
 this.code_db_api =
 `
+const oracledb = require('oracledb')
 //---------------------create--------------------//
 const createSql =
 \`CALL PC_${this.table_name.substr(4, this.table_name.length - 4)}_CREATE(
@@ -349,6 +367,12 @@ async function create(reg) {
   }
 }
 module.exports.create = create
+`
+this.code_body = 
+`
+{
+  ${this.code_body_array}
+}
 `
     } else if (this.http_type == 'put') {
       this.code_controller =
@@ -405,6 +429,12 @@ async function update(reg) {
 
 module.exports.update = update;
 `
+this.code_body = 
+`
+{
+  ${this.code_body_array}
+}
+`
 
     } else if (this.http_type == 'all') {
 
@@ -423,6 +453,12 @@ module.exports.update = update;
       duration: 2000,
     });
     this._clipBoardService.copyFromContent(this.code_controller)
+  }
+  copy_body(){
+    this._snackBar.open("Copied!", "", {
+      duration: 2000,
+    });
+    this._clipBoardService.copyFromContent(this.code_body)
   }
 
 }

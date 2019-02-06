@@ -129,7 +129,7 @@
             <mat-card-subtitle>copy and paste!</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-          
+            <pre (click)="copy(code_html)"><code [highlight]="code_html" (highlighted)="onHighlight($event)"></code></pre>
           </mat-card-content>
           <mat-card-actions>
               <button mat-raised-button>Copy</button>
@@ -182,3 +182,14 @@
         </mat-card>
   </div>
 </div>
+
+
+
+
+
+
+ 
+  
+
+
+

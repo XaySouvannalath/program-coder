@@ -23,7 +23,7 @@ body{
   .sidenav-container
   {
      
-    
+        background-image: url(assets/space3840x1080.jpg);
       background-repeat: round    ; 
       background-attachment: fixed;
       position: relative;
@@ -31,22 +31,40 @@ body{
   
   
   }
+  .mat-option{
+    background-color: #ff800098;
+    color: white;
+    
+  }
+  .mat-option:hover{
+      color: black;
+      background-color: #ff800098;
+  }
+  .mat-card{
+      background-color: #ff800098;
+        color: white;
+    }
 .mat-toolbar{
-    background-color: black;
+    background-color: #ff8000;
 }
 .footer{
-    background-color:black;
+    background-color:#ff8000;
 }
 .mat-raised-button{
-    background-color: #7e7a77;
+    background-color: #ff8000;
     color: white;
+}
+
+.mat-expansion-panel{
+    background-color: #ff800098;
+        color: white;
 }
 .box{
     
     border-radius: 10px;
     border-top-color: #ff6600;
     border-top-width: 3px;
-    border: solid 1px black;
+    border: solid 1px #ff8000;
     margin: 10px;
 }
 .full {

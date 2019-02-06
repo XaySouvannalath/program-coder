@@ -45,7 +45,7 @@ export class GenerateAngularComponent implements OnInit {
       value: '{...}'
     }
   }
-  copy(text: string, codeIn: string) {
+  copy(codeIn: string) {
     this._snackBar.open("Copied!", "", {
       duration: 2000,
     });
@@ -238,7 +238,6 @@ export class GenerateAngularComponent implements OnInit {
         }
       }
     }
-    console.log(this.interface_column)
     this.code_model_interface =
       `
   export interface ${this.generateInterfaceName()}{
@@ -345,6 +344,31 @@ export class GenerateAngularComponent implements OnInit {
     }
   }
 
+
+  column_html = []
+  generateCodeHtml(){
+    this.column_html = []
+    for (var i = 0; i < this.obj.length; i++) {
+      if (this.obj[i].bd == true) {
+        if (i == 0) {
+          this.column_html.push(`<mat-form-field><input matInput required [(ngModel)]=\"model.${this.obj[i].name}\"  name=\"${ this.obj[i].name}\"   #${this.obj[i].name}=\"ngModel\"></mat-form-field>\n`)
+        } else {
+          this.column_html.push(`<mat-form-field><input matInput required [(ngModel)]=\"model.${this.obj[i].name}\"  name=\"${ this.obj[i].name}\"   #${this.obj[i].name}=\"ngModel\"></mat-form-field>\n`)
+        }
+      }
+    }
+
+   
+    this.code_html=
+  `
+  
+${this.column_html.join("")}
+ 
+  `
+    
+      console.log(this.column_html)
+  }
+
 // execute all generation coder
   generate() {
     this.generateInterfaceModel()
@@ -353,5 +377,6 @@ export class GenerateAngularComponent implements OnInit {
     this.generateService()
     this.generatePutRow()
     this.generateComponent()
+    this.generateCodeHtml()
   }
 }

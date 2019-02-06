@@ -4,7 +4,9 @@
 .sidenav {
   width: 250px;
   box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  background-color:#ff800091;
 }
+
 .spacer{
   flex: 1 1 auto;
  }
@@ -61,3 +63,4 @@
   margin-right: auto;
   width: 20%;
 }
+
